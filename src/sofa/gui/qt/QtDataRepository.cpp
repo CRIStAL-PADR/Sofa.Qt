@@ -19,13 +19,13 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <sofa/qt/QtDataRepository.h>
+#include <sofa/gui/qt/QtDataRepository.h>
 #include <sofa/helper/Utils.h>
 
 using sofa::helper::system::FileRepository;
 using sofa::helper::Utils;
 
-namespace sofa::qt
+namespace sofa::gui::qt
 {
 
 FileRepository QtDataRepository(

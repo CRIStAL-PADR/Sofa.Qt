@@ -23,7 +23,7 @@
 
 #include <sofa/helper/system/FileRepository.h>
 
-namespace sofa::qt
+namespace sofa::gui::qt
 {
 extern SOFA_GUI_COMMON_API sofa::helper::system::FileRepository QtDataRepository;
 } // namespace sofa::gui::common

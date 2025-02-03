@@ -37,7 +37,7 @@ using sofa::helper::system::FileSystem ;
 
 #include "QDocBrowser.h"
 #include "../RealGUI.h"
-#include <sofa/gui/common/GuiDataRepository.h>
+#include <sofa/gui/qt/QtDataRepository.h>
 
 #include <iostream>
 
@@ -179,7 +179,7 @@ DocBrowser::DocBrowser(RealGUI* g) : QDialog(g)
     verticalLayout->addWidget(bg) ;
 
     QPushButton* prev=new QPushButton() ;
-    prev->setIcon(QIcon(asQStr(common::GuiDataRepository.getFile("icons/back.png")))) ;
+    prev->setIcon(QIcon(asQStr(qt::QtDataRepository.getFile("icons/back.png")))) ;
     connect(prev, SIGNAL(clicked()), this, SLOT(goToPrev()));
     bgl->addWidget(prev);
 
@@ -188,7 +188,7 @@ DocBrowser::DocBrowser(RealGUI* g) : QDialog(g)
     bgl->addWidget(m_lineEdit);
 
     QPushButton* home=new QPushButton();
-    home->setIcon(QIcon(asQStr(common::GuiDataRepository.getFile("icons/home.png"))));
+    home->setIcon(QIcon(asQStr(qt::QtDataRepository.getFile("icons/home.png"))));
     connect(home, SIGNAL(clicked()), this, SLOT(goToHome()));
     bgl->addWidget(home) ;
 
@@ -298,7 +298,7 @@ void DocBrowser::goTo(const QUrl& u)
 
 void DocBrowser::goToHome()
 {
-    loadHtml(GuiDataRepository.getFile("docs/runsofa.html").c_str());
+    loadHtml(QtDataRepository.getFile("docs/runsofa.html").c_str());
 }
 
 void DocBrowser::flipVisibility()

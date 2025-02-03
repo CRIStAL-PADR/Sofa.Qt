@@ -69,8 +69,8 @@ using sofa::helper::Utils;
 #include <sofa/helper/system/FileRepository.h>
 using sofa::helper::system::DataRepository;
 
-#include <sofa/gui/common/GuiDataRepository.h>
-using sofa::gui::common::GuiDataRepository;
+#include <sofa/gui/qt/QtDataRepository.h>
+using sofa::gui::qt::QtDataRepository;
 
 #include <sofa/simulation/SceneLoaderFactory.h>
 using sofa::simulation::SceneLoaderFactory;

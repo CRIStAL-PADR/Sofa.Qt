@@ -181,6 +181,7 @@ set(HEADER_FILES
     ${SRC_ROOT}/viewer/EngineBackend.h
     ${SRC_ROOT}/viewer/VisualModelPolicy.h
     ${SRC_ROOT}/GenericWidget.h
+    ${SRC_ROOT}/QtDataRepository.h
     )
 set(SOURCE_FILES
     ${SRC_ROOT}/init.cpp
@@ -220,7 +221,8 @@ set(SOURCE_FILES
     ${SRC_ROOT}/WDoubleLineEdit.cpp
     ${SRC_ROOT}/viewer/SofaViewer.cpp
     ${SRC_ROOT}/SofaSceneGraphWidget.cpp
-    ${SRC_ROOT}/viewer/VisualModelPolicy.cpp    
+    ${SRC_ROOT}/viewer/VisualModelPolicy.cpp
+    ${SRC_ROOT}/QtDataRepository.cpp
 )
 set(UI_FILES
     ${SRC_ROOT}/AboutDialog.ui

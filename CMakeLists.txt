@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(Sofa.GUI.Qt LANGUAGES CXX)
+project(Sofa.Qt LANGUAGES CXX)
 
 # Detect if component is compiled outside SOFA
 if ("${CMAKE_PROJECT_NAME}" STREQUAL "${PROJECT_NAME}")
@@ -132,7 +132,7 @@ endif()
 
 
 
-set(SRC_ROOT src/sofa/gui/qt)
+set(SRC_ROOT src/sofa/qt)
 
 set(MOC_HEADER_FILES
     ${SRC_ROOT}/AboutSOFADialog.h

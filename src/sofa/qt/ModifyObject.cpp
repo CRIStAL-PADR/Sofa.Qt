@@ -29,7 +29,7 @@
 #include <QDesktopServices>
 #include <QTimer>
 #include <sofa/qt/QTransformationWidget.h>
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
 #include <sofa/qt/QEnergyStatWidget.h>
 #include <sofa/qt/QMomentumStatWidget.h>
 #endif

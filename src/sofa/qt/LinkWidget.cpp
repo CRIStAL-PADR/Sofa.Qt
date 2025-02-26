@@ -19,7 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#define SOFA_GUI_QT_LINKWIDGET_CPP
+#define SOFA_QT_LINKWIDGET_CPP
 
 #include "LinkWidget.h"
 #include "ModifyObject.h"
@@ -55,7 +55,7 @@ QDisplayLinkInfoWidget::QDisplayLinkInfoWidget(QWidget* parent, const std::strin
 	if (ownerClass) ownerClassName = ownerClass->className;
 	
 	/*
-#ifndef SOFA_GUI_QT_NO_DATA_HELP
+#ifndef SOFA_QT_NO_DATA_HELP
     QLabel* helper_label = new QLabel(this);
     helper_label->setText(QString(final_str.c_str()));
     helper_label->setMinimumWidth(20);

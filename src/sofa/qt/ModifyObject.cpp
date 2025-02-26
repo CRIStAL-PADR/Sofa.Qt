@@ -65,7 +65,7 @@ ModifyObject::ModifyObject(void *Id,
       dialogFlags_(dialogFlags),
       messageTab(nullptr),
       messageEdit(nullptr)
-    #if SOFA_GUI_QT_HAVE_QT_CHARTS
+    #if SOFA_QT_HAVE_QT_CHARTS
     ,energy(nullptr)
     ,momentum(nullptr)
     #endif
@@ -234,7 +234,7 @@ void ModifyObject::createDialog(core::objectmodel::Base* base)
             }
         }
 
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
         //Energy Widget
         if (simulation::Node* real_node = sofa::core::castTo<simulation::Node*>(basenode))
         {
@@ -487,7 +487,7 @@ void ModifyObject::updateValues()
 void ModifyObject::updateTables()
 {
     emit updateDataWidgets();
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     if (energy)
     {
         if (dialogTab->currentWidget() == energy) energy->step();

@@ -34,7 +34,7 @@ namespace sofa::qt
 {
 
 
-class SOFA_GUI_QT_API DisplayFlagWidget : public QTreeWidget
+class SOFA_QT_API DisplayFlagWidget : public QTreeWidget
 {
     Q_OBJECT;
 public:
@@ -83,7 +83,7 @@ protected:
 };
 
 
-class SOFA_GUI_QT_API DisplayFlagsDataWidget : public TDataWidget< sofa::core::visual::DisplayFlags >
+class SOFA_QT_API DisplayFlagsDataWidget : public TDataWidget< sofa::core::visual::DisplayFlags >
 {
     Q_OBJECT;
 public:

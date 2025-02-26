@@ -48,7 +48,7 @@ namespace sofa::simulation
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QSofaStatWidget : public QWidget
+class SOFA_QT_API QSofaStatWidget : public QWidget
 {
     Q_OBJECT
 public:

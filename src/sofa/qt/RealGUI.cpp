@@ -27,11 +27,11 @@
 #include "GraphVisitor.h"
 #endif
 
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
 #include "SofaWindowProfiler.h"
 #endif
 
-#if SOFA_GUI_QT_HAVE_NODEEDITOR
+#if SOFA_QT_HAVE_NODEEDITOR
 #include "SofaWindowDataGraph.h"
 #endif
 
@@ -119,7 +119,7 @@ using sofa::helper::system::FileMonitor;
 #include <sofa/core/ObjectFactory.h>
 using sofa::core::ObjectFactory;
 
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
 #include "panels/QDocBrowser.h"
 using sofa::qt::DocBrowser;
 #endif
@@ -209,7 +209,7 @@ void RealGUI::setupSurfaceFormat()
     std::call_once(flag, []
     {
         QSurfaceFormat format;
-        if(!SOFA_GUI_QT_ENABLE_VSYNC)
+        if(!SOFA_QT_ENABLE_VSYNC)
         {
             format.setSwapInterval(0); //Setting an interval value of 0 will turn the vertical refresh syncing off
         }
@@ -287,7 +287,7 @@ void RealGUI::InitApplication( RealGUI* _gui)
     const QString pathIcon=(DataRepository.getFirstPath() + std::string( "/icons/SOFA.png" )).c_str();
     application->setWindowIcon(QIcon(pathIcon));
 
-    if(SOFA_GUI_QT_ENABLE_NATIVE_MENU)
+    if(SOFA_QT_ENABLE_NATIVE_MENU)
     {
         // Use the OS'native menu instead of the Qt one
         _gui->menubar->setNativeMenuBar(true);
@@ -342,7 +342,7 @@ RealGUI::RealGUI ( const char* viewername)
       recentlyOpenedFilesManager(BaseGUI::getConfigDirectoryPath() + "/runSofa.ini"),
       m_saveReloadFile(false),
       displayFlag(nullptr),
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
       m_docbrowser(nullptr),
 #endif
       m_animationState(false),
@@ -449,7 +449,7 @@ RealGUI::RealGUI ( const char* viewername)
 
     tabs->removeTab(tabs->indexOf(TabVisualGraph));
 
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
     m_docbrowser = new DocBrowser(this);
     /// Signal to the realGUI that the visibility has changed (eg: to update the menu bar)
     connect(m_docbrowser, SIGNAL(visibilityChanged(bool)), this, SLOT(docBrowserVisibilityChanged(bool)));
@@ -599,7 +599,7 @@ void RealGUI::fileOpen ( std::string filename, bool temporaryFile, bool reload )
         setSceneWithoutMonitor(mSimulation, filename.c_str(), temporaryFile);
     else{
         setScene(mSimulation, filename.c_str(), temporaryFile);
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
         m_docbrowser->loadHtml( filename ) ;
 #endif
     }
@@ -615,12 +615,12 @@ void RealGUI::fileOpen ( std::string filename, bool temporaryFile, bool reload )
         simulationGraph->expandPathFrom(expandedNodes);
     }
 
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     if (m_windowTimerProfiler)
         m_windowTimerProfiler->resetGraph();
 #endif
 
-#if SOFA_GUI_QT_HAVE_NODEEDITOR
+#if SOFA_QT_HAVE_NODEEDITOR
     if (m_sofaWindowDataGraph)
         m_sofaWindowDataGraph->resetNodeGraph(currentSimulation());
 #endif
@@ -733,7 +733,7 @@ void RealGUI::setSceneWithoutMonitor (Node::SPtr root, const char* filename, boo
             recentlyOpenedFilesManager.openFile(filename);
         m_saveReloadFile=temporaryFile;
         setTitle ( filename );
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
         if (m_docbrowser && filename)
         {
             m_docbrowser->loadHtml( filename );
@@ -786,7 +786,7 @@ void RealGUI::setScene(Node::SPtr root, const char* filename, bool temporaryFile
         FileMonitor::addFile(filename, m_filelistener);
     }
     setSceneWithoutMonitor(root, filename, temporaryFile) ;
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
     if (m_docbrowser && filename)
     {
         m_docbrowser->loadHtml( filename ) ;
@@ -886,7 +886,7 @@ void RealGUI::editGnuplotDirectory()
 
 void RealGUI::showDocBrowser()
 {
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
     m_docbrowser->flipVisibility();
 #else
     msg_warning("RealGUI") << "Doc browser has been disabled because Qt5WebEngine is not available";
@@ -929,7 +929,7 @@ void RealGUI::showVideoRecorderManager()
 
 void RealGUI::showWindowDataGraph()
 {
-#if SOFA_GUI_QT_HAVE_NODEEDITOR
+#if SOFA_QT_HAVE_NODEEDITOR
     std::cout << "RealGUI::showWindowDataGraph()" << std::endl;
     //m_sofaMouseManager->createGraph();
     if (m_sofaWindowDataGraph == nullptr)
@@ -1472,7 +1472,7 @@ void RealGUI::createPluginManager()
 
 void RealGUI::createSofaWindowDataGraph()
 {
-#if SOFA_GUI_QT_HAVE_NODEEDITOR
+#if SOFA_QT_HAVE_NODEEDITOR
     m_sofaWindowDataGraph = new SofaWindowDataGraph(this, currentSimulation());
     m_sofaWindowDataGraph->hide();
 #endif
@@ -1674,7 +1674,7 @@ void RealGUI::createWindowVisitor()
 
 void RealGUI::createAdvancedTimerProfilerWindow()
 {
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     m_windowTimerProfiler = new SofaWindowProfiler(this);
     m_windowTimerProfiler->hide();
     connect( displayTimeProfiler, SIGNAL ( toggled ( bool ) ), this, SLOT ( displayProflierWindow ( bool ) ) );
@@ -1879,7 +1879,7 @@ void RealGUI::step()
     if ( !currentSimulation()->getContext()->getAnimate() )
         startButton->setChecked ( false );
 
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     if (displayTimeProfiler->isChecked())
     {
         m_windowTimerProfiler->pushStepData();
@@ -2131,7 +2131,7 @@ void RealGUI::setExportVisitor ( bool )
 
 void RealGUI::displayProflierWindow (bool value)
 {
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     if (m_windowTimerProfiler == nullptr)
         return;
 

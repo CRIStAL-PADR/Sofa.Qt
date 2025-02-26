@@ -37,7 +37,7 @@ class LinkWidget;
 class QDisplayLinkInfoWidget;
 struct ModifyObjectFlags;
 
-class SOFA_GUI_QT_API QDisplayLinkWidget : public QGroupBox
+class SOFA_QT_API QDisplayLinkWidget : public QGroupBox
 {
     Q_OBJECT
 public:
@@ -79,7 +79,7 @@ protected:
 
 
 
-class SOFA_GUI_QT_API QLinkSimpleEdit : public LinkWidget
+class SOFA_QT_API QLinkSimpleEdit : public LinkWidget
 {
     Q_OBJECT
     typedef enum QEditType { TEXTEDIT, LINEEDIT } QEditType;

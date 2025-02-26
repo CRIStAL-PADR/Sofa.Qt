@@ -24,5 +24,5 @@
 
 namespace sofa::qt
 {
-    void SOFA_GUI_QT_API init();
+    void SOFA_QT_API init();
 } // namespace sofa::qt

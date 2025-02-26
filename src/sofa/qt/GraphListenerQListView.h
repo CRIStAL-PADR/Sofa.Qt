@@ -60,7 +60,7 @@ public:
 };
 
 
-class SOFA_GUI_QT_API GraphListenerQListView : public MutationListener
+class SOFA_QT_API GraphListenerQListView : public MutationListener
 {
 public:
     SofaSceneGraphWidget* widget;

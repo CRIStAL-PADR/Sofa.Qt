@@ -31,7 +31,7 @@ namespace sofa::simulation::mechanicalvisitor
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QEnergyStatWidget : public QGraphStatWidget
+class SOFA_QT_API QEnergyStatWidget : public QGraphStatWidget
 {
 
     Q_OBJECT

@@ -68,7 +68,7 @@ typedef QOpenGLWidget QOpenGLWidget;
 typedef QGLWidget QOpenGLWidget;
 #endif // defined(QT_VERSION) && QT_VERSION >= 0x050400
 
-class SOFA_GUI_QT_API QtViewer
+class SOFA_QT_API QtViewer
         : public QOpenGLWidget
         , public sofa::qt::viewer::OglModelSofaViewer
 {

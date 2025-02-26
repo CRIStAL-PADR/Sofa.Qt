@@ -19,11 +19,11 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <sofa/gui/common/config.h>
+#include <sofa/qt/config.h>
 
 #include <sofa/helper/system/FileRepository.h>
 
 namespace sofa::qt
 {
-extern SOFA_GUI_COMMON_API sofa::helper::system::FileRepository QtDataRepository;
+extern SOFA_QT_API sofa::helper::system::FileRepository QtDataRepository;
 } // namespace sofa::gui::common

@@ -54,11 +54,11 @@ namespace sofa::qt
         static bool first = true;
         if (first)
         {
-#if SOFA_GUI_QT_ENABLE_QGLVIEWER
+#if SOFA_QT_ENABLE_QGLVIEWER
             sofa::gui::common::GUIManager::RegisterGUI("qglviewer", &sofa::qt::RealGUI::CreateGUI, nullptr, 3);
 #endif
 
-#if SOFA_GUI_QT_ENABLE_QTVIEWER
+#if SOFA_QT_ENABLE_QTVIEWER
             sofa::gui::common::GUIManager::RegisterGUI("qt", &sofa::qt::RealGUI::CreateGUI, nullptr, 2);
 #endif
 

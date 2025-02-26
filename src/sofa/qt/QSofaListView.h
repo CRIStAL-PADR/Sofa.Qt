@@ -40,7 +40,7 @@
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QSofaListView : public SofaSceneGraphWidget
+class SOFA_QT_API QSofaListView : public SofaSceneGraphWidget
 {
     Q_OBJECT
 public:

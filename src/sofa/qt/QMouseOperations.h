@@ -40,7 +40,7 @@ namespace sofa::qt
 {
 class DataWidget;
 
-class SOFA_GUI_QT_API QMouseOperation : public QWidget
+class SOFA_QT_API QMouseOperation : public QWidget
 {
     Q_OBJECT
 public:

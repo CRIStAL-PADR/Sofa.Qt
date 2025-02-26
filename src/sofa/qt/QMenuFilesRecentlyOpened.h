@@ -28,7 +28,7 @@
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QMenuFilesRecentlyOpened: public gui::common::FilesRecentlyOpenedManager
+class SOFA_QT_API QMenuFilesRecentlyOpened: public gui::common::FilesRecentlyOpenedManager
 {
 public:
     QMenuFilesRecentlyOpened(const std::string &configFile): gui::common::FilesRecentlyOpenedManager(configFile),menuRecentlyOpenedFiles(nullptr) {}

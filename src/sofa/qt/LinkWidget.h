@@ -43,7 +43,7 @@ namespace sofa::qt
 /**
  *\brief Abstract Interface of a qwidget which allows to edit a link.
  */
-class SOFA_GUI_QT_API LinkWidget : public QWidget
+class SOFA_QT_API LinkWidget : public QWidget
 {
     Q_OBJECT
 public:
@@ -172,7 +172,7 @@ protected:
 
 
 /// Widget used to display the name of a Link
-class SOFA_GUI_QT_API QDisplayLinkInfoWidget: public QWidget
+class SOFA_QT_API QDisplayLinkInfoWidget: public QWidget
 {
     Q_OBJECT
 public:

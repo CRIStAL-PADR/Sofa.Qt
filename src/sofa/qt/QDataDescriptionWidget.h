@@ -34,7 +34,7 @@ namespace sofa::qt
 {
 
 struct ModifyObjectFlags;
-class SOFA_GUI_QT_API QDataDescriptionWidget : public QWidget
+class SOFA_QT_API QDataDescriptionWidget : public QWidget
 {
     Q_OBJECT
 public:

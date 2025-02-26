@@ -26,7 +26,7 @@
 namespace sofa::qt::viewer
 {
 
-class SOFA_GUI_QT_API VisualModelPolicy
+class SOFA_QT_API VisualModelPolicy
 {
 public:
 	VisualModelPolicy(core::visual::VisualParams* vparams = core::visual::visualparams::defaultInstance());

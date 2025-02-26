@@ -31,7 +31,7 @@ class MechanicalGetMomentumVisitor;
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QMomentumStatWidget : public QGraphStatWidget
+class SOFA_QT_API QMomentumStatWidget : public QGraphStatWidget
 {
 
     Q_OBJECT

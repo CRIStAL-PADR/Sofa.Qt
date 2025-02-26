@@ -52,7 +52,7 @@ class QDragEnterEvent;
 
 namespace sofa::qt
 {
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
 class DocBrowser ;
 #endif
 
@@ -72,11 +72,11 @@ class GraphVisitor;
 
 class SofaMouseManager;
 
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
 class SofaWindowProfiler;
 #endif
 
-#if SOFA_GUI_QT_HAVE_NODEEDITOR
+#if SOFA_QT_HAVE_NODEEDITOR
 class SofaWindowDataGraph;
 #endif
 
@@ -86,7 +86,7 @@ class SofaViewer;
 }
 
 
-class SOFA_GUI_QT_API RealGUI : public QMainWindow, public Ui::GUI, public sofa::gui::common::BaseGUI
+class SOFA_QT_API RealGUI : public QMainWindow, public Ui::GUI, public sofa::gui::common::BaseGUI
 {
     Q_OBJECT    
 
@@ -134,11 +134,11 @@ private:
     GraphVisitor* handleTraceVisitor;
 #endif
     SofaMouseManager* m_sofaMouseManager;
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     SofaWindowProfiler* m_windowTimerProfiler;
 #endif
 
-#if SOFA_GUI_QT_HAVE_NODEEDITOR
+#if SOFA_QT_HAVE_NODEEDITOR
     SofaWindowDataGraph* m_sofaWindowDataGraph;
 #endif
 //-----------------OPTIONS DEFINITIONS------------------------}
@@ -193,7 +193,7 @@ private:
     float m_objectScale[2];
     bool m_saveReloadFile;
     DisplayFlagsDataWidget*  displayFlag  {nullptr};
-#if(SOFA_GUI_QT_HAVE_QT5_WEBENGINE)
+#if(SOFA_QT_HAVE_QT5_WEBENGINE)
     DocBrowser*              m_docbrowser {nullptr};
 #endif
     bool m_animationState;

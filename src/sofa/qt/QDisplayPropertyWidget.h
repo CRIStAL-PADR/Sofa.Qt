@@ -28,7 +28,7 @@
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/type/fixed_array.h>
 #include <sofa/qt/QTransformationWidget.h>
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
 #include <sofa/qt/QEnergyStatWidget.h>
 #endif
 #include <sofa/qt/WDoubleLineEdit.h>
@@ -58,7 +58,7 @@
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QDisplayTreeItemWidget : public QWidget
+class SOFA_QT_API QDisplayTreeItemWidget : public QWidget
 {
     Q_OBJECT
 
@@ -76,7 +76,7 @@ private:
 };
 
 // QDisplayPropertyWidget describe a widget where you can view and edit every properties of Sofa components
-class SOFA_GUI_QT_API QDisplayPropertyWidget : public QTreeWidget
+class SOFA_QT_API QDisplayPropertyWidget : public QTreeWidget
 {
 	Q_OBJECT
 

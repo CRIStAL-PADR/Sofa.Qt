@@ -47,7 +47,7 @@ namespace sofa::qt
 /**
 *\brief Abstract Interface of a qwidget which allows to edit a data.
 */
-class SOFA_GUI_QT_API DataWidget : public QWidget
+class SOFA_QT_API DataWidget : public QWidget
 {
     Q_OBJECT
 public:
@@ -249,7 +249,7 @@ protected:
 
 
 
-class SOFA_GUI_QT_API QPushButtonUpdater: public QPushButton
+class SOFA_QT_API QPushButtonUpdater: public QPushButton
 {
     Q_OBJECT
 public:
@@ -261,7 +261,7 @@ public Q_SLOTS:
 };
 
 //Widget used to display the name of a Data and if needed the link to another Data
-class SOFA_GUI_QT_API QDisplayDataInfoWidget: public QWidget
+class SOFA_QT_API QDisplayDataInfoWidget: public QWidget
 {
     Q_OBJECT
 public:
@@ -300,11 +300,11 @@ typedef sofa::helper::Factory<std::string, DataWidget, DataWidget::CreatorArgume
 } //namespace sofa::qt
 
 //MOC_SKIP_BEGIN
-#if !defined(SOFA_BUILD_SOFA_GUI_QT)
+#if !defined(SOFA_BUILD_SOFA_QT)
 namespace sofa::helper
 {
 //delay load of the specialized Factory class. unique definition reside in the cpp file
-extern template class SOFA_GUI_QT_API Factory<std::string, qt::DataWidget, qt::DataWidget::CreatorArgument>;
+extern template class SOFA_QT_API Factory<std::string, qt::DataWidget, qt::DataWidget::CreatorArgument>;
 } // namespace sofa::helper
 
 #endif

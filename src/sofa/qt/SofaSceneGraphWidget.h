@@ -77,7 +77,7 @@ enum SofaListViewAttribute
     MODELER
 };
 
-class SOFA_GUI_QT_API SofaSceneGraphWidget : public QTreeWidget
+class SOFA_QT_API SofaSceneGraphWidget : public QTreeWidget
 {
     Q_OBJECT
 public:

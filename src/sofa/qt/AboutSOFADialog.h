@@ -27,7 +27,7 @@
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API AboutSOFADialog: public QDialog, public Ui_AboutDialog
+class SOFA_QT_API AboutSOFADialog: public QDialog, public Ui_AboutDialog
 {
     Q_OBJECT
 public:

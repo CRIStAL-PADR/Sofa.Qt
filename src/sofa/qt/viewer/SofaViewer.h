@@ -44,7 +44,7 @@ enum
     BTLEFT_MODE = 101, BTRIGHT_MODE = 102, BTMIDDLE_MODE = 103,
 };
 
-class SOFA_GUI_QT_API SofaViewer : public sofa::gui::common::BaseViewer
+class SOFA_QT_API SofaViewer : public sofa::gui::common::BaseViewer
 {
 
 public:

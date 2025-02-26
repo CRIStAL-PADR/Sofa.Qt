@@ -32,7 +32,7 @@
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API QTableViewUpdater : public QTableView
+class SOFA_QT_API QTableViewUpdater : public QTableView
 {
     Q_OBJECT
 
@@ -44,7 +44,7 @@ public slots:
 
 };
 
-class SOFA_GUI_QT_API QTableModelUpdater : public QStandardItemModel
+class SOFA_QT_API QTableModelUpdater : public QStandardItemModel
 {
     Q_OBJECT
     bool m_isReadOnly ;

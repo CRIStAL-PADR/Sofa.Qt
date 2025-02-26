@@ -32,7 +32,7 @@
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API SofaPluginManager: public QDialog, public Ui_PluginManager
+class SOFA_QT_API SofaPluginManager: public QDialog, public Ui_PluginManager
 {
     Q_OBJECT
 public:

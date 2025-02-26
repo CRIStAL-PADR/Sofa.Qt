@@ -37,7 +37,7 @@ namespace sofa::component::collision::model
 namespace sofa::qt
 {
 
-class SOFA_GUI_QT_API GLPickHandler : public gui::common::PickHandler
+class SOFA_QT_API GLPickHandler : public gui::common::PickHandler
 {
     typedef PickHandler Inherit;
     typedef sofa::component::collision::model::RayCollisionModel MouseCollisionModel;

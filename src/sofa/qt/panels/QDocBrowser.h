@@ -56,7 +56,7 @@ signals:
     void linkClicked(const QUrl&);
 };
 
-class SOFA_GUI_QT_API DocBrowser : public QDialog
+class SOFA_QT_API DocBrowser : public QDialog
 {
 Q_OBJECT
 

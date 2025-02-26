@@ -28,7 +28,7 @@
 #include <QKeyEvent>
 
 /* -------------------------------------------------------- */
-class SOFA_GUI_QT_API WDoubleLineEdit : public QLineEdit
+class SOFA_QT_API WDoubleLineEdit : public QLineEdit
 {
     Q_OBJECT
     Q_PROPERTY( double minValue READ minValue WRITE setMinValue )

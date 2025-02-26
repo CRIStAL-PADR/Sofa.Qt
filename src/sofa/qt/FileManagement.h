@@ -30,13 +30,13 @@ namespace sofa::qt
 {
 
 
-QString SOFA_GUI_QT_API getExistingDirectory ( QWidget* parent, const QString & dir = QString(), const char * name = nullptr, const QString & caption = QString() );
+QString SOFA_QT_API getExistingDirectory ( QWidget* parent, const QString & dir = QString(), const char * name = nullptr, const QString & caption = QString() );
 
-QString SOFA_GUI_QT_API getOpenFileName ( QWidget* parent, const QString & startWith = QString(), const QString & filter = QString(), const char * name = nullptr, const QString & caption = QString(), QString * selectedFilter = nullptr );
+QString SOFA_QT_API getOpenFileName ( QWidget* parent, const QString & startWith = QString(), const QString & filter = QString(), const char * name = nullptr, const QString & caption = QString(), QString * selectedFilter = nullptr );
 
-QString SOFA_GUI_QT_API getSaveFileName ( QWidget* parent, const QString & startWith = QString(), const QString & filter = QString(), const char * name = nullptr, const QString & caption = QString(), QString * selectedFilter = nullptr );
+QString SOFA_QT_API getSaveFileName ( QWidget* parent, const QString & startWith = QString(), const QString & filter = QString(), const char * name = nullptr, const QString & caption = QString(), QString * selectedFilter = nullptr );
 
 
-void SOFA_GUI_QT_API getFilesInDirectory( const QString &path, std::vector< QString > &files, bool recursive=true, const std::vector< QString > &filter=std::vector< QString >() );
+void SOFA_QT_API getFilesInDirectory( const QString &path, std::vector< QString > &files, bool recursive=true, const std::vector< QString > &filter=std::vector< QString >() );
 
 } //namespace sofa::qt

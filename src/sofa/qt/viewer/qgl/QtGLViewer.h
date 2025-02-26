@@ -51,7 +51,7 @@
 namespace sofa::qt::viewer::qgl
 {
 
-class SOFA_GUI_QT_API QtGLViewer :public QGLViewer,   public sofa::qt::viewer::OglModelSofaViewer
+class SOFA_QT_API QtGLViewer :public QGLViewer,   public sofa::qt::viewer::OglModelSofaViewer
 {
     typedef type::Vec3::value_type Real;
     Q_OBJECT

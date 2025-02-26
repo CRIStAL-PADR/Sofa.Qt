@@ -50,7 +50,7 @@ namespace sofa::qt
 {
 
 class QTransformationWidget;
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
 class QEnergyStatWidget;
 class QMomentumStatWidget;
 #endif
@@ -104,7 +104,7 @@ typedef struct ModifyObjectFlags
     };
 } ModifyObjectFlags;
 
-class SOFA_GUI_QT_API ModifyObject : public QDialog
+class SOFA_QT_API ModifyObject : public QDialog
 {
     Q_OBJECT
 public:
@@ -172,7 +172,7 @@ protected:
     QPushButton *buttonUpdate;
     int m_numMessages;
 
-#if SOFA_GUI_QT_HAVE_QT_CHARTS
+#if SOFA_QT_HAVE_QT_CHARTS
     //Energy widget: plot the kinetic & potential energy
     QEnergyStatWidget* energy;
     //Momentum widget: plot the linear & angular momentum

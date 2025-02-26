@@ -19,7 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#define SOFA_GUI_QT_DATAWIDGET_CPP
+#define SOFA_QT_DATAWIDGET_CPP
 
 #include "DataWidget.h"
 #include "ModifyObject.h"
@@ -35,7 +35,7 @@
 
 namespace sofa::helper
 {
-template class SOFA_GUI_QT_API Factory<std::string, sofa::qt::DataWidget, sofa::qt::DataWidget::CreatorArgument>;
+template class SOFA_QT_API Factory<std::string, sofa::qt::DataWidget, sofa::qt::DataWidget::CreatorArgument>;
 } // namespace sofa::helper
 
 namespace sofa::qt

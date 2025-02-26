@@ -34,7 +34,7 @@
 namespace sofa::qt::viewer
 {
 
-class SOFA_GUI_QT_API GLBackend : public EngineBackend
+class SOFA_QT_API GLBackend : public EngineBackend
 {
 public:
     GLBackend();

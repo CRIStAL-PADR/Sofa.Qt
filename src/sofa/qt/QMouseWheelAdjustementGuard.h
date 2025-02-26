@@ -34,7 +34,7 @@ namespace sofa::qt
 ///
 /// This code is grabbed from:
 /// https://stackoverflow.com/questions/5821802/qspinbox-inside-a-qscrollarea-how-to-prevent-spin-box-from-stealing-focus-when
-class SOFA_GUI_QT_API QMouseWheelAdjustmentGuard : public QObject
+class SOFA_QT_API QMouseWheelAdjustmentGuard : public QObject
 {
 public:
     explicit QMouseWheelAdjustmentGuard(QObject *parent);

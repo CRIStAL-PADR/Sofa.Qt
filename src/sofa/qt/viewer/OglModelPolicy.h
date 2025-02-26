@@ -30,7 +30,7 @@
 namespace sofa::qt::viewer
 {
 	
-class SOFA_GUI_QT_API OglModelPolicy : public VisualModelPolicy
+class SOFA_QT_API OglModelPolicy : public VisualModelPolicy
 {
 protected:
     sofa::core::ObjectFactory::ClassEntry::SPtr classVisualModel;
@@ -42,7 +42,7 @@ public:
 
 
 template < typename VisualModelPolicyType >
-class SOFA_GUI_QT_API CustomPolicySofaViewer : public VisualModelPolicyType, public sofa::qt::viewer::SofaViewer
+class SOFA_QT_API CustomPolicySofaViewer : public VisualModelPolicyType, public sofa::qt::viewer::SofaViewer
 {
 public:
     using VisualModelPolicyType::load;

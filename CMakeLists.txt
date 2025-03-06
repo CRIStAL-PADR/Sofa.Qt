@@ -75,6 +75,7 @@ elseif (Qt6Core_FOUND)
 endif()
 
 
+
 sofa_find_package(Sofa.GL QUIET)
 
 # QtViewer and QGLViewer
@@ -117,10 +118,9 @@ endif()
 option(SOFA_GUI_QT_ENABLE_NATIVE_MENU "Enable Qt to use the operating system's native menu for the Qt GUI" ${DEFAULT_SOFA_GUI_QT_ENABLE_NATIVE_MENU})
 
 # NodeEditor
-option(SOFA_GUI_QT_ENABLE_NODEGRAPH "Build the Node graph representation. NodeEditor library is needed." OFF)
-if(SOFA_GUI_QT_ENABLE_NODEGRAPH)
-    sofa_find_package(NodeEditor REQUIRED BOTH_SCOPES)
-endif()
+find_package(NodeEditor QUIET) # if found, then NodeGraph will be ON by default
+option(SOFA_GUI_QT_ENABLE_NODEGRAPH "Build the Node graph representation. NodeEditor library is needed." ${NodeEditor_FOUND})
+
 
 # FFMPEG_exec
 sofa_find_package(FFMPEG_exec BOTH_SCOPES)

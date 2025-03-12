@@ -75,7 +75,6 @@ elseif (Qt6Core_FOUND)
 endif()
 
 
-
 sofa_find_package(Sofa.GL QUIET)
 
 # QtViewer and QGLViewer

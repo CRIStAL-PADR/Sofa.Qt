@@ -61,21 +61,7 @@ QSofaListView::QSofaListView(const SofaListViewAttribute& attribute,
 {
     this->setObjectName(name);
     this->setWindowFlags(f);
-    //List of objects
-    //Read the object.txt that contains the information about the objects which can be added to the scenes within a given BoundingBox and scale range
-    std::string object ( "config/object.txt" );
 
-    if( sofa::helper::system::DataRepository.findFile ( object ) )
-    {
-        list_object.clear();
-        std::ifstream end(object.c_str());
-        std::string s;
-        while( end >> s )
-        {
-            list_object.push_back(s);
-        }
-        end.close();
-    }
 
     this->setColumnCount(2);
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)

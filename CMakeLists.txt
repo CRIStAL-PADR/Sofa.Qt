@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(Sofa.GUI.Qt LANGUAGES CXX)
+project(Sofa.Qt LANGUAGES CXX)
 
 # Detect if component is compiled outside SOFA
 if ("${CMAKE_PROJECT_NAME}" STREQUAL "${PROJECT_NAME}")
@@ -8,7 +8,7 @@ if ("${CMAKE_PROJECT_NAME}" STREQUAL "${PROJECT_NAME}")
 endif()
 
 # Qt dependencies
-set(SOFA_GUI_QT_TARGETS "")
+set(SOFA_QT_TARGETS "")
 set(QT_USE_IMPORTED_TARGETS 1)
 set(QT5_NO_LINK_QTMAIN 1)
 
@@ -26,13 +26,13 @@ if (Qt6Core_FOUND)
     message("${PROJECT_NAME}: will use Qt6")
     find_package(Qt6 COMPONENTS Gui GuiTools Widgets WidgetsTools OpenGLWidgets REQUIRED)
     # GuiTools & WidgetsTools does not define a Qt6::component CMake target
-    # So we can't look for those target to know how we should define SOFA_GUI_QT_HAVE_QT6
+    # So we can't look for those target to know how we should define SOFA_QT_HAVE_QT6
     sofa_find_package(Qt6 COMPONENTS Gui Widgets OpenGLWidgets REQUIRED)
-    set(SOFA_GUI_QT_TARGETS ${SOFA_GUI_QT_TARGETS} Qt::Core Qt::Gui Qt::Widgets Qt::OpenGLWidgets )
+    set(SOFA_QT_TARGETS ${SOFA_QT_TARGETS} Qt::Core Qt::Gui Qt::Widgets Qt::OpenGLWidgets )
 elseif (Qt5Core_FOUND)
     message("${PROJECT_NAME}: will use Qt5 (deprecated)")
     sofa_find_package(Qt5 COMPONENTS Core Gui OpenGL REQUIRED)
-    set(SOFA_GUI_QT_TARGETS ${SOFA_GUI_QT_TARGETS} Qt5::Core Qt5::Gui Qt5::OpenGL)
+    set(SOFA_QT_TARGETS ${SOFA_QT_TARGETS} Qt5::Core Qt5::Gui Qt5::OpenGL)
 else()
     message(SEND_ERROR "${PROJECT_NAME}: Could not find either Qt5 or Qt6.")
 endif()
@@ -41,36 +41,36 @@ if (Qt5Core_FOUND)
     # Profiling
     sofa_find_package(Qt5 COMPONENTS Charts QUIET BOTH_SCOPES)
     if(Qt5Charts_FOUND)
-        set(SOFA_GUI_QT_TARGETS ${SOFA_GUI_QT_TARGETS} Qt5::Charts)
+        set(SOFA_QT_TARGETS ${SOFA_QT_TARGETS} Qt5::Charts)
     else()
         message(STATUS "${PROJECT_NAME}: Qt5Charts not found. No chart nor Profile will be compiled")
     endif()
 
     # QDocBrowser
     find_package(Qt5 COMPONENTS WebEngine QUIET) # if found, then QDocBrowser will be ON by default
-    option(SOFA_GUI_QT_ENABLE_QDOCBROWSER "Build the QDocBrowser. QtWebEngine is needed." ${Qt5WebEngine_FOUND})
+    option(SOFA_QT_ENABLE_QDOCBROWSER "Build the QDocBrowser. QtWebEngine is needed." ${Qt5WebEngine_FOUND})
 
-    if(SOFA_GUI_QT_ENABLE_QDOCBROWSER)
+    if(SOFA_QT_ENABLE_QDOCBROWSER)
         sofa_find_package(Qt5 COMPONENTS WebEngine WebEngineWidgets REQUIRED BOTH_SCOPES)
-        set(SOFA_GUI_QT_TARGETS ${SOFA_GUI_QT_TARGETS} Qt5::WebEngine Qt5::WebEngineWidgets)
+        set(SOFA_QT_TARGETS ${SOFA_QT_TARGETS} Qt5::WebEngine Qt5::WebEngineWidgets)
     endif()
 elseif (Qt6Core_FOUND)
 
     # Profiling
     sofa_find_package(Qt6 COMPONENTS Charts QUIET BOTH_SCOPES)
     if(Qt6Charts_FOUND)
-        set(SOFA_GUI_QT_TARGETS ${SOFA_GUI_QT_TARGETS} Qt::Charts)
+        set(SOFA_QT_TARGETS ${SOFA_QT_TARGETS} Qt::Charts)
     else()
         message(STATUS "${PROJECT_NAME}: Qt6 Charts not found. No chart nor Profile will be compiled")
     endif()
 
     # # QDocBrowser
     find_package(Qt6 COMPONENTS WebEngineCore QUIET) # if found, then QDocBrowser will be ON by default
-    option(SOFA_GUI_QT_ENABLE_QDOCBROWSER "Build the QDocBrowser. QtWebEngine is needed." ${Qt6WebEngineCore_FOUND})
-    if(SOFA_GUI_QT_ENABLE_QDOCBROWSER)
+    option(SOFA_QT_ENABLE_QDOCBROWSER "Build the QDocBrowser. QtWebEngine is needed." ${Qt6WebEngineCore_FOUND})
+    if(SOFA_QT_ENABLE_QDOCBROWSER)
          # WebEngineCore needs Positioning WebChannel at cmake configure step (?)
         sofa_find_package(Qt6 COMPONENTS Positioning WebChannel WebEngineCore WebEngineWidgets REQUIRED BOTH_SCOPES)
-        set(SOFA_GUI_QT_TARGETS ${SOFA_GUI_QT_TARGETS} Qt::WebEngineCore Qt::WebEngineWidgets)
+        set(SOFA_QT_TARGETS ${SOFA_QT_TARGETS} Qt::WebEngineCore Qt::WebEngineWidgets)
     endif()
 endif()
 
@@ -80,16 +80,16 @@ sofa_find_package(Sofa.GL QUIET)
 # QtViewer and QGLViewer
 if(Sofa.GL_FOUND)
     # QtViewer
-    option(SOFA_GUI_QT_ENABLE_QTVIEWER "Compile the QtViewer for the Qt GUI" ON)
+    option(SOFA_QT_ENABLE_QTVIEWER "Compile the QtViewer for the Qt GUI" ON)
 
     # QGLViewer
-    option(SOFA_GUI_QT_ENABLE_QGLVIEWER "Compile the QGLViewer for the Qt GUI" ON)
+    option(SOFA_QT_ENABLE_QGLVIEWER "Compile the QGLViewer for the Qt GUI" ON)
 
-    if(SOFA_GUI_QT_ENABLE_QGLVIEWER)
+    if(SOFA_QT_ENABLE_QGLVIEWER)
 
         find_package(QGLViewer QUIET)
         if(NOT QGLViewer_FOUND AND SOFA_ALLOW_FETCH_DEPENDENCIES)
-            message("Sofa.GUI.Qt: DEPENDENCY QGLViewer NOT FOUND. SOFA_ALLOW_FETCH_DEPENDENCIES is ON, fetching QGLViewer...")
+            message("Sofa.Qt: DEPENDENCY QGLViewer NOT FOUND. SOFA_ALLOW_FETCH_DEPENDENCIES is ON, fetching QGLViewer...")
             include(FetchContent)
             FetchContent_Declare(QGLViewer
                     GIT_REPOSITORY https://github.com/sofa-framework/libQGLViewer/
@@ -97,28 +97,28 @@ if(Sofa.GL_FOUND)
             )
             FetchContent_MakeAvailable(QGLViewer)
         elseif (NOT QGLViewer_FOUND)
-            message(FATAL_ERROR "Sofa.GUI.Qt: DEPENDENCY QGLViewer NOT FOUND. SOFA_ALLOW_FETCH_DEPENDENCIES is OFF and thus cannot be fetched. Install QGLViewer (version=2.8.0), or enable SOFA_ALLOW_FETCH_DEPENDENCIES to fix this issue.")
+            message(FATAL_ERROR "Sofa.Qt: DEPENDENCY QGLViewer NOT FOUND. SOFA_ALLOW_FETCH_DEPENDENCIES is OFF and thus cannot be fetched. Install QGLViewer (version=2.8.0), or enable SOFA_ALLOW_FETCH_DEPENDENCIES to fix this issue.")
         endif()
     endif()
 else()
-    message(STATUS "Sofa.GUI.Qt: Sofa.GL has not been activated, QtViewer/QGLViewer will be disabled.")
-    set(SOFA_GUI_QT_ENABLE_QTVIEWER OFF)
-    set(SOFA_GUI_QT_ENABLE_QGLVIEWER OFF)
+    message(STATUS "Sofa.Qt: Sofa.GL has not been activated, QtViewer/QGLViewer will be disabled.")
+    set(SOFA_QT_ENABLE_QTVIEWER OFF)
+    set(SOFA_QT_ENABLE_QGLVIEWER OFF)
 endif()
 
 # VSync
-option(SOFA_GUI_QT_ENABLE_VSYNC "Enable vertical refresh sync" OFF)
+option(SOFA_QT_ENABLE_VSYNC "Enable vertical refresh sync" OFF)
 
 # Qt native menu
-set(DEFAULT_SOFA_GUI_QT_ENABLE_NATIVE_MENU ON)
+set(DEFAULT_SOFA_QT_ENABLE_NATIVE_MENU ON)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(DEFAULT_SOFA_GUI_QT_ENABLE_NATIVE_MENU OFF)
+    set(DEFAULT_SOFA_QT_ENABLE_NATIVE_MENU OFF)
 endif()
-option(SOFA_GUI_QT_ENABLE_NATIVE_MENU "Enable Qt to use the operating system's native menu for the Qt GUI" ${DEFAULT_SOFA_GUI_QT_ENABLE_NATIVE_MENU})
+option(SOFA_QT_ENABLE_NATIVE_MENU "Enable Qt to use the operating system's native menu for the Qt GUI" ${DEFAULT_SOFA_QT_ENABLE_NATIVE_MENU})
 
 # NodeEditor
-option(SOFA_GUI_QT_ENABLE_NODEGRAPH "Build the Node graph representation. NodeEditor library is needed." OFF)
-if(SOFA_GUI_QT_ENABLE_NODEGRAPH)
+option(SOFA_QT_ENABLE_NODEGRAPH "Build the Node graph representation. NodeEditor library is needed." OFF)
+if(SOFA_QT_ENABLE_NODEGRAPH)
     sofa_find_package(NodeEditor REQUIRED BOTH_SCOPES)
 endif()
 
@@ -132,7 +132,7 @@ endif()
 
 
 
-set(SRC_ROOT src/sofa/gui/qt)
+set(SRC_ROOT src/sofa/qt)
 
 set(MOC_HEADER_FILES
     ${SRC_ROOT}/AboutSOFADialog.h
@@ -271,12 +271,12 @@ if(Sofa.GL_FOUND)
         )
 
     # QtViewer
-    if(SOFA_GUI_QT_ENABLE_QTVIEWER)
+    if(SOFA_QT_ENABLE_QTVIEWER)
         list(APPEND MOC_HEADER_FILES ${SRC_ROOT}/viewer/qt/QtViewer.h)
         list(APPEND SOURCE_FILES ${SRC_ROOT}/viewer/qt/QtViewer.cpp)
     endif()
 
-    if(SOFA_GUI_QT_ENABLE_QGLVIEWER)
+    if(SOFA_QT_ENABLE_QGLVIEWER)
         list(APPEND MOC_HEADER_FILES ${SRC_ROOT}/viewer/qgl/QtGLViewer.h)
         list(APPEND SOURCE_FILES ${SRC_ROOT}/viewer/qgl/QtGLViewer.cpp)
     endif()
@@ -304,7 +304,7 @@ else()
     message(STATUS "${PROJECT_NAME}: QtCharts not found, SofaWindowProfiler will not be built.")
 endif()
 
-if(SOFA_GUI_QT_ENABLE_QDOCBROWSER)
+if(SOFA_QT_ENABLE_QDOCBROWSER)
     list(APPEND MOC_HEADER_FILES ${SRC_ROOT}/panels/QDocBrowser.h)
     list(APPEND SOURCE_FILES ${SRC_ROOT}/panels/QDocBrowser.cpp)
 else()
@@ -315,7 +315,7 @@ endif()
 
 
 #NodeEditor
-if (SOFA_GUI_QT_ENABLE_NODEGRAPH)
+if (SOFA_QT_ENABLE_NODEGRAPH)
     list(APPEND MOC_HEADER_FILES 
         ${SRC_ROOT}/SofaWindowDataGraph.h
         ${SRC_ROOT}/dataGraph/SofaComponentNodeModel.h
@@ -350,7 +350,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CUR
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.GUI.Common)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Visual)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.SceneUtility)
-target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFA_GUI_QT_TARGETS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFA_QT_TARGETS})
 
 
 
@@ -360,13 +360,13 @@ endif()
 
 if(Sofa.GL_FOUND)
     target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.GL)
-    if(SOFA_GUI_QT_ENABLE_QGLVIEWER)
+    if(SOFA_QT_ENABLE_QGLVIEWER)
         target_link_libraries(${PROJECT_NAME} PUBLIC QGLViewer)
         include_directories(${PROJECT_NAME} PUBLIC ${qglviewer_SOURCE_DIR})
     endif()
 endif()
 
-if(SOFA_GUI_QT_ENABLE_NODEGRAPH)
+if(SOFA_QT_ENABLE_NODEGRAPH)
     target_link_libraries(${PROJECT_NAME} PUBLIC NodeEditor::nodes)
     if (SOFA_BUILD_RELEASE_PACKAGE OR CMAKE_SYSTEM_NAME STREQUAL Windows)
         sofa_install_libraries(TARGETS NodeEditor::nodes)

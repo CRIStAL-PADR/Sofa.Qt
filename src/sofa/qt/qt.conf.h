@@ -8,11 +8,14 @@
 #include <sofa/helper/system/FileSystem.h>
 using sofa::helper::system::FileSystem;
 
+#include <sofa/helper/logging/Messaging.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
+
 
 static std::vector<unsigned char> qt_resource_data = {};
 

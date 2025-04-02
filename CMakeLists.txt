@@ -376,6 +376,11 @@ if(FFMPEG_EXEC_FOUND)
     install(PROGRAMS "${FFMPEG_EXEC_FILE}" DESTINATION bin COMPONENT applications)
 endif()
 
+find_package(SofaPython3 QUIET)
+if(SofaPython3_FOUND)
+    add_subdirectory(bindings)
+endif()
+
 # Create build and install versions of .ini file for resources finding
 set(RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${SRC_ROOT}/resources")
 set(FFMPEG_EXEC_PATH "${FFMPEG_EXEC_FILE}") # absolute path for build dir, see .ini file
@@ -387,9 +392,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/etc/${PROJECT_NAME}.ini.in "${CMAKE_B
 install(FILES "${CMAKE_BINARY_DIR}/etc/installed${PROJECT_NAME}.ini" DESTINATION etc RENAME ${PROJECT_NAME}.ini COMPONENT applications)
 
 install(DIRECTORY "${SRC_ROOT}/resources/" DESTINATION "share/sofa/gui/qt" COMPONENT resources)
-
-
-
 
 sofa_create_package_with_targets(
     PACKAGE_NAME ${PROJECT_NAME}

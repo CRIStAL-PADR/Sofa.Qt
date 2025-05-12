@@ -39,7 +39,7 @@ namespace sofa::qt
 QVisitorControlPanel::QVisitorControlPanel(QWidget* parent): QWidget(parent)
 {
     QVBoxLayout *vbox=new QVBoxLayout(this);
-    vbox->setMargin(0);
+    vbox->setContentsMargins(0,0,0,0  );
     vbox->setSpacing(0);
 
     //Filter the results to quickly find a visitor

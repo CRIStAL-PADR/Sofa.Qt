@@ -55,11 +55,11 @@ namespace sofa::qt
         if (first)
         {
 #if SOFA_QT_ENABLE_QGLVIEWER
-            sofa::gui::common::GUIManager::RegisterGUI("qglviewer", &sofa::qt::RealGUI::CreateGUI, nullptr, 3);
+            sofa::gui::common::GUIManager::RegisterGUI("qglviewer", &sofa::qt::RealGUI::CreateGUI, nullptr, 0);
 #endif
 
 #if SOFA_QT_ENABLE_QTVIEWER
-            sofa::gui::common::GUIManager::RegisterGUI("qt", &sofa::qt::RealGUI::CreateGUI, nullptr, 2);
+            sofa::gui::common::GUIManager::RegisterGUI("qt", &sofa::qt::RealGUI::CreateGUI, nullptr, 0);
 #endif
 
             // if ObjectStateListener is triggered (either by changing the message number, or by

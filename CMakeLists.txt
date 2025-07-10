@@ -4,6 +4,7 @@ project(Sofa.Qt LANGUAGES CXX)
 # Detect if component is compiled outside SOFA
 if ("${CMAKE_PROJECT_NAME}" STREQUAL "${PROJECT_NAME}")
     find_package(Sofa.Config REQUIRED)
+    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
     sofa_find_package(Sofa.GUI.Common REQUIRED)
 endif()
 

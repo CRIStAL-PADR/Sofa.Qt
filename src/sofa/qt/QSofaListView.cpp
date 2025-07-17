@@ -300,6 +300,15 @@ void QSofaListView::updateMatchingObjectmodel(QTreeWidgetItem* item, int)
     updateMatchingObjectmodel(item);
 }
 
+Base* QSofaListView::getCurrentSelectedBase()
+{
+    auto items = selectedItems();
+    if(items.size()==0)
+        return nullptr;
+
+    return graphListener_->findObject(items[0]);
+}
+
 void QSofaListView::updateMatchingObjectmodel(QTreeWidgetItem* item)
 {
     BaseData* data = nullptr;

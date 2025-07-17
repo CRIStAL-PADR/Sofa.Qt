@@ -499,6 +499,17 @@ void RealGUI::setTraceVisitors(bool b)
 
 //======================= METHODS ========================= {
 
+sofa::core::objectmodel::Base* RealGUI::getCurrentSelection() const
+{
+    return currentSelection;
+}
+
+void RealGUI::setCurrentSelection(sofa::core::objectmodel::Base* newSelection)
+{
+    currentSelection = newSelection;
+    getViewer()->setCurrentSelection(currentSelection);
+}
+
 void RealGUI::docBrowserVisibilityChanged(bool visibility)
 {
     if(visibility)
@@ -1544,6 +1555,13 @@ void RealGUI::createSimulationGraph()
     connect ( sceneGraphRefreshToggleButton, &QPushButton::clicked , this, &RealGUI::onSceneGraphRefreshButtonClicked );
     connect(simulationGraph, &QSofaListView::dirtynessChanged, this, &RealGUI::sceneGraphViewDirtynessChanged);
     connect(simulationGraph, &QSofaListView::lockingChanged, this, &RealGUI::sceneGraphViewLockingChanged);
+
+    // Activates the hoovering visual feedback only when working in interactive mode.
+    if(m_enableInteraction){
+        connect(simulationGraph, &QSofaListView::itemSelectionChanged, this, [this](){
+            setCurrentSelection(simulationGraph->getCurrentSelectedBase());
+        });
+    }
 
     connect(simulationGraph, SIGNAL( RootNodeChanged(sofa::simulation::Node*, const char*) ), this, SLOT ( newRootNode(sofa::simulation::Node* , const char*) ) );
     connect(simulationGraph, SIGNAL( NodeRemoved() ), this, SLOT( update() ) );

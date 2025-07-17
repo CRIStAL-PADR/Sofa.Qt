@@ -609,51 +609,50 @@ class data_widget_container < sofa::type::fixed_array<T, N> > : public fixed_vec
 /// Topological edges/triangles/... support
 ////////////////////////////////////////////////////////////////
 
-template<>
-class vector_data_trait < sofa::core::topology::Topology::Edge >
-    : public vector_data_trait < sofa::type::fixed_array < sofa::core::topology::Topology::PointID, 2 > >
+template<class GeometryElement>
+class vector_data_trait < sofa::topology::Element<GeometryElement> >
 {
+public:
+    using data_type = sofa::topology::Element<GeometryElement>;
+    using value_type = typename sofa::topology::Element<GeometryElement>::value_type;
+    enum { NDIM = 1 };
+    enum { SIZE = sofa::topology::Element<GeometryElement>::NumberOfNodes };
+    static sofa::Size size(const data_type&) { return SIZE; }
+    static const char* header(const data_type& /*d*/, sofa::Size /*i*/ = 0)
+    {
+        return nullptr;
+    }
+    static const value_type* get(const data_type& d, sofa::Index i = 0)
+    {
+        return ((unsigned)i < (unsigned)size(d)) ? &(d[i]) : nullptr;
+    }
+    static void set( const value_type& v, data_type& d, sofa::Index i = 0)
+    {
+        if ((unsigned)i < (unsigned)size(d))
+            d[i] = v;
+    }
+    static void resize( sofa::Size /*s*/, data_type& /*d*/)
+    {
+    }
+
 };
+
 
 template<>
 class data_widget_container < sofa::core::topology::Topology::Edge > : public fixed_vector_data_widget_container < sofa::core::topology::Topology::Edge >
 {};
 
 template<>
-class vector_data_trait < sofa::core::topology::Topology::Triangle >
-    : public vector_data_trait < sofa::type::fixed_array < sofa::core::topology::Topology::PointID, 3 > >
-{
-};
-
-template<>
 class data_widget_container < sofa::core::topology::Topology::Triangle > : public fixed_vector_data_widget_container < sofa::core::topology::Topology::Triangle >
 {};
-
-template<>
-class vector_data_trait < sofa::core::topology::Topology::Quad >
-    : public vector_data_trait < sofa::type::fixed_array < sofa::core::topology::Topology::PointID, 4 > >
-{
-};
 
 template<>
 class data_widget_container < sofa::core::topology::Topology::Quad > : public fixed_vector_data_widget_container < sofa::core::topology::Topology::Quad >
 {};
 
 template<>
-class vector_data_trait < sofa::core::topology::Topology::Tetrahedron >
-    : public vector_data_trait < sofa::type::fixed_array < sofa::core::topology::Topology::PointID, 4 > >
-{
-};
-
-template<>
 class data_widget_container < sofa::core::topology::Topology::Tetrahedron > : public fixed_vector_data_widget_container < sofa::core::topology::Topology::Tetrahedron >
 {};
-
-template<>
-class vector_data_trait < sofa::core::topology::Topology::Hexahedron >
-    : public vector_data_trait < sofa::type::fixed_array < sofa::core::topology::Topology::PointID, 8 > >
-{
-};
 
 template<>
 class data_widget_container < sofa::core::topology::Topology::Hexahedron > : public fixed_vector_data_widget_container < sofa::core::topology::Topology::Hexahedron >

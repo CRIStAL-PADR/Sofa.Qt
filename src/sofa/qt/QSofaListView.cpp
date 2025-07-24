@@ -77,7 +77,7 @@ QSofaListView::QSofaListView(const SofaListViewAttribute& attribute,
 
     setRootIsDecorated(true);
     setIndentation(8);
-
+    setSelectionMode(QAbstractItemView::ExtendedSelection);
     graphListener_ = new GraphListenerQListView(this);
 
     this->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -300,13 +300,12 @@ void QSofaListView::updateMatchingObjectmodel(QTreeWidgetItem* item, int)
     updateMatchingObjectmodel(item);
 }
 
-Base* QSofaListView::getCurrentSelectedBase()
+const std::set<Base::SPtr> QSofaListView::getCurrentSelectedBases() const
 {
-    auto items = selectedItems();
-    if(items.size()==0)
-        return nullptr;
-
-    return graphListener_->findObject(items[0]);
+    std::set<Base::SPtr> items;
+    for(auto item : selectedItems())
+        items.insert(graphListener_->findObject(item));
+    return items;
 }
 
 void QSofaListView::updateMatchingObjectmodel(QTreeWidgetItem* item)

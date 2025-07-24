@@ -80,7 +80,7 @@ public:
     void setPropertyWidget(QDisplayPropertyWidget* propertyWid) {propertyWidget = propertyWid;}
     void addInPropertyWidget(QTreeWidgetItem *item, bool clear);
 
-    sofa::core::objectmodel::Base* getCurrentSelectedBase();
+    const std::set<core::Base::SPtr> getCurrentSelectedBases() const;
 
     void Clear(sofa::simulation::Node* rootNode);
 

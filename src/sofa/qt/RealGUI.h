@@ -385,21 +385,9 @@ signals:
     void newScene();
     void newStep();
     void quit();
-    void currentSelectionChanged(sofa::core::objectmodel::Base* previousSelection,
-                                 sofa::core::objectmodel::Base* newSelection);
 //-----------------SIGNALS-SLOTS------------------------}
 
-public:
-    sofa::core::objectmodel::Base* getCurrentSelection() const;
-    void setCurrentSelection(sofa::core::objectmodel::Base* newSelection);
-
-private:
-    sofa::core::objectmodel::Base* currentSelection {nullptr};
 };
-
-
-
-
 
 struct ActivationFunctor
 {

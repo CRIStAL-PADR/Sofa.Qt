@@ -168,8 +168,6 @@ protected:
     //virtual bool event ( QEvent * e );
 
     virtual void	drawScene() override;
-    virtual void	drawSelection() override{};
-
     virtual void	DrawLogo(void);
 
 

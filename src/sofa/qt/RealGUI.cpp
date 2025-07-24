@@ -507,7 +507,7 @@ sofa::core::objectmodel::Base* RealGUI::getCurrentSelection() const
 void RealGUI::setCurrentSelection(sofa::core::objectmodel::Base* newSelection)
 {
     currentSelection = newSelection;
-    getViewer()->setCurrentSelection(currentSelection);
+    getViewer()->setCurrentSelection({currentSelection});
 }
 
 void RealGUI::docBrowserVisibilityChanged(bool visibility)

@@ -230,6 +230,7 @@ set(UI_FILES
     ${SRC_ROOT}/GUI.ui
     ${SRC_ROOT}/MouseManager.ui
     ${SRC_ROOT}/PluginManager.ui
+    ${SRC_ROOT}/ViewerShortcuts.ui
     ${SRC_ROOT}/VideoRecorderManager.ui
 )
 set(QRC_FILES

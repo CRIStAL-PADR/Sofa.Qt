@@ -110,6 +110,7 @@
     </property>
     <addaction name="separator"/>
     <addaction name="helpShowDocBrowser"/>
+    <addaction name="actionViewerShowDocumentation"/>
     <addaction name="helpAboutAction"/>
    </widget>
    <addaction name="fileMenu"/>
@@ -127,7 +128,7 @@
    <property name="minimumSize">
     <size>
      <width>200</width>
-     <height>551</height>
+     <height>594</height>
     </size>
    </property>
    <attribute name="dockWidgetArea">
@@ -167,38 +168,6 @@
           <property name="sizeConstraint">
            <enum>QLayout::SetNoConstraint</enum>
           </property>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="ResetViewButton">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="toolTip">
-             <string>Set the camera to initial position and orientation</string>
-            </property>
-            <property name="text">
-             <string>Reset &amp;View</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+V</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="startButton">
-            <property name="toolTip">
-             <string>Launch the Simulation</string>
-            </property>
-            <property name="text">
-             <string>&amp;Animate</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+A</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QPushButton" name="SaveViewButton">
             <property name="enabled">
@@ -228,32 +197,6 @@
             </property>
             <property name="shortcut">
              <string>Alt+R</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="stepButton">
-            <property name="toolTip">
-             <string>Compute the simulation at time t+DT</string>
-            </property>
-            <property name="text">
-             <string>S&amp;tep</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+T</string>
-            </property>
-            <property name="autoRepeat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QPushButton" name="screenshotButton">
-            <property name="text">
-             <string>Save S&amp;creenshot</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+C</string>
             </property>
            </widget>
           </item>
@@ -306,6 +249,64 @@
             </item>
            </layout>
           </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="ResetViewButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="toolTip">
+             <string>Set the camera to initial position and orientation</string>
+            </property>
+            <property name="text">
+             <string>Reset &amp;View</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+V</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="screenshotButton">
+            <property name="text">
+             <string>Save S&amp;creenshot</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+C</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="startButton">
+            <property name="toolTip">
+             <string>Launch the Simulation</string>
+            </property>
+            <property name="text">
+             <string>&amp;Animate</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+A</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="stepButton">
+            <property name="toolTip">
+             <string>Compute the simulation at time t+DT</string>
+            </property>
+            <property name="text">
+             <string>S&amp;tep</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+T</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -339,7 +340,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <widget class="QWidget" name="TabGraph">
            <attribute name="title">
@@ -563,13 +564,13 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="TabPage">
+          <widget class="QWidget" name="tabViewer">
            <attribute name="title">
             <string>Viewer</string>
            </attribute>
            <layout class="QVBoxLayout" name="_22">
             <item>
-             <layout class="QHBoxLayout" name="_23">
+             <layout class="QHBoxLayout" name="tabViewerResolution">
               <property name="spacing">
                <number>0</number>
               </property>
@@ -644,7 +645,111 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
              </layout>
             </item>
             <item>
-             <widget class="QTextBrowser" name="textEdit1"/>
+             <layout class="QVBoxLayout" name="tabViewerShowObjectNode">
+              <item>
+               <widget class="QGroupBox" name="showNode">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="title">
+                 <string>Show node</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_4">
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_3">
+                   <item>
+                    <widget class="QCheckBox" name="showNodeBoundingBox">
+                     <property name="text">
+                      <string>bounding boxes</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="showObject">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="title">
+                 <string>Show object</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout">
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_2">
+                   <item>
+                    <widget class="QCheckBox" name="showObjectBoundingBox">
+                     <property name="text">
+                      <string>bounding boxes</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="showObjectPositions">
+                     <property name="text">
+                      <string>positions</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="showObjectSurfaces">
+                     <property name="text">
+                      <string>surfaces</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="showObjectVolumes">
+                     <property name="text">
+                      <string>volumes</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="showObjectIndices">
+                     <property name="text">
+                      <string>indices</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="renderingScale" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_3">
+                      <item>
+                       <widget class="QLabel" name="label">
+                        <property name="text">
+                         <string>rendering scale</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="value">
+                        <property name="singleStep">
+                         <double>0.100000000000000</double>
+                        </property>
+                        <property name="value">
+                         <double>0.020000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -821,6 +926,11 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
    </property>
    <property name="toolTip">
     <string>Data Graph Window</string>
+   </property>
+  </action>
+  <action name="actionViewerShowDocumentation">
+   <property name="text">
+    <string>Viewer's shortcuts</string>
    </property>
   </action>
  </widget>

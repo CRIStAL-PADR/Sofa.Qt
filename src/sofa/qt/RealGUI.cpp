@@ -1431,8 +1431,32 @@ void RealGUI::initViewer(BaseViewer* _viewer)
                 sofaViewer->getQWidget(), SLOT( fitNodeBBox(sofa::core::objectmodel::BaseNode*) )
                 );
 
-        // setGUI
-        textEdit1->setText ( sofaViewer->helpString() );
+        Ui_GUI::showNodeBoundingBox->setChecked(sofaViewer->m_showSelectedNodeBoundingBox);
+        Ui_GUI::showObjectBoundingBox->setChecked(sofaViewer->m_showSelectedObjectBoundingBox);
+        Ui_GUI::showObjectPositions->setChecked(sofaViewer->m_showSelectedObjectPositions);
+        Ui_GUI::showObjectSurfaces->setChecked(sofaViewer->m_showSelectedObjectSurfaces);
+        Ui_GUI::showObjectVolumes->setChecked(sofaViewer->m_showSelectedObjectVolumes);
+        Ui_GUI::showObjectIndices->setChecked(sofaViewer->m_showSelectedObjectIndices);
+        Ui_GUI::value->setValue(sofaViewer->m_visualScaling);
+
+        connect(showNodeBoundingBox, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedNodeBoundingBox = checked;});
+        connect(showObjectBoundingBox, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectBoundingBox = checked;});
+        connect(showObjectPositions, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectPositions = checked;});
+        connect(showObjectSurfaces, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectSurfaces = checked;});
+        connect(showObjectVolumes, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectVolumes = checked;});
+        connect(showObjectIndices, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectIndices = checked;});
+
+        connect(actionViewerShowDocumentation, &QAction::triggered, this, [this, sofaViewer](bool state){
+            QDialog* dialog=new QDialog();
+            auto tmp = new Ui::windowViewerShortcuts();
+            tmp->setupUi(dialog);
+            tmp->content->setText(sofaViewer->helpString());
+            dialog->open();
+        });
+
+        connect(Ui_GUI::value, &QDoubleSpinBox::valueChanged,
+                this, [sofaViewer](double value){sofaViewer->m_visualScaling = value;});
+
         connect ( this, SIGNAL( newStep()), sofaViewer->getQWidget(), SLOT( update()));
 
         sofaViewer->getQWidget()->setFocus();
@@ -1497,7 +1521,7 @@ void RealGUI::createRecentFilesMenu()
 
 void RealGUI::createBackgroundGUIInfos()
 {
-    QWidget *colour = new QWidget(TabPage);
+    QWidget *colour = new QWidget(tabViewer);
     QHBoxLayout *colourLayout = new QHBoxLayout(colour);
     colourLayout->addWidget(new QLabel(QString("Colour "),colour));
 
@@ -1515,7 +1539,7 @@ void RealGUI::createBackgroundGUIInfos()
         connect( background[i], SIGNAL( returnPressed() ), this, SLOT( updateBackgroundColour() ) );
     }
 
-    QWidget *image = new QWidget(TabPage);
+    QWidget *image = new QWidget(tabViewer);
     QHBoxLayout *imageLayout = new QHBoxLayout(image);
     imageLayout->addWidget(new QLabel(QString("Image "),image));
 
@@ -1528,8 +1552,8 @@ void RealGUI::createBackgroundGUIInfos()
     imageLayout->addWidget(backgroundImage);
     connect( backgroundImage, SIGNAL( returnPressed() ), this, SLOT( updateBackgroundImage() ) );
 
-    ((QVBoxLayout*)(TabPage->layout()))->insertWidget(1,colour);
-    ((QVBoxLayout*)(TabPage->layout()))->insertWidget(2,image);
+    ((QVBoxLayout*)(tabViewer->layout()))->insertWidget(1,colour);
+    ((QVBoxLayout*)(tabViewer->layout()))->insertWidget(2,image);
 }
 
 //------------------------------------

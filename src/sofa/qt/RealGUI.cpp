@@ -153,20 +153,43 @@ public:
         QCoreApplication::setApplicationName("runSofa");
         setStyle("Fusion");
 
-        setStyleSheet("QToolTip { color: white; background-color: #353535; border: 1px solid white; }");
+        setStyleSheet(R"(
+            QTabBar::tab {
+                background: #2F2F2F;
+                color: #8A8A8A;
+                padding: 6px;
+                border: 1px solid #222;
+                border-bottom: none; /* pour ne pas couper le contenu */
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+            }
+
+            QTabBar::tab:selected {
+                background: #3F3F3F; /* Couleur active */
+                color: white;
+            }
+
+            QTabWidget::pane {
+                border: 1px solid #222;
+                top: -1px; /* pour coller l’onglet actif au contenu */
+            }
+
+            QToolTip { color: white; background-color: #353535; border: 1px solid white; }
+        )");
+
 
         QPalette defaultPalette = QApplication::style()->standardPalette();
         QColor text = defaultPalette.color(QPalette::ButtonText);
 
         QPalette darkPalette;
-        darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+        darkPalette.setColor(QPalette::Window, QColor(63, 63, 63));
         darkPalette.setColor(QPalette::WindowText, text);
         darkPalette.setColor(QPalette::Base, QColor(63, 63, 63));
         darkPalette.setColor(QPalette::AlternateBase, Qt::red);
         darkPalette.setColor(QPalette::ToolTipBase, QColor(35, 35, 35));
         darkPalette.setColor(QPalette::ToolTipText, text);
         darkPalette.setColor(QPalette::Text, text);
-        darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+        darkPalette.setColor(QPalette::Button, QColor(63, 63, 63));
         darkPalette.setColor(QPalette::ButtonText, text);
         darkPalette.setColor(QPalette::BrightText, Qt::red);
         darkPalette.setColor(QPalette::Highlight, QColor(142, 45, 197).lighter());

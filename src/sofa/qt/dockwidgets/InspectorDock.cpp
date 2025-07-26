@@ -49,8 +49,6 @@ InspectorDock::InspectorDock(QWidget* parent) : QDockWidget(parent)
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
     setMinimumWidth(400);
-    setMaximumWidth(400);
-
 }
 
 void InspectorDock::setCurrentSelection(const std::set<sofa::core::objectmodel::Base::SPtr>& bases)
@@ -124,7 +122,10 @@ void InspectorDock::updateContentFromBase(sofa::core::objectmodel::Base* base)
             box->setMaximumWidth(350);
             verticalLayout->addWidget(box);
             verticalLayout->setAlignment(Qt::AlignTop);
-            //verticalLayout->addStretch();
+
+            formLayout->setLabelAlignment(Qt::AlignLeft |Qt::AlignVCenter);
+            formLayout->setAlignment(Qt::AlignLeft |Qt::AlignVCenter);
+            formLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
             QObject::connect(box, &QGroupBox::toggled, [box](bool checked) {
                 if(checked)
@@ -137,13 +138,12 @@ void InspectorDock::updateContentFromBase(sofa::core::objectmodel::Base* base)
             {
                 ModifyObjectFlags flags;
                 flags.setFlagsForSofa();
-                //auto dataWidget = new QDisplayDataWidget(contentWidget, data, flags);
 
                 DataWidget::CreatorArgument dwarg;
                 dwarg.name =  data->getName();
                 dwarg.data = data;
                 dwarg.parent = this;
-                dwarg.readOnly = data->isReadOnly();
+                dwarg.readOnly = true;
                 if( dynamic_cast<core::objectmodel::DataFileName*>(data) != nullptr )
                 {
                     // a bit of a hack for DataFileName widgets.

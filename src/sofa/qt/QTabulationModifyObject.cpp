@@ -44,6 +44,7 @@ QTabulationModifyObject::QTabulationModifyObject(QWidget* parent,
     vbox->setObjectName("tabVisualizationLayout");
     vbox->setContentsMargins(0, 0, 0, 0);
     vbox->setSpacing(0);
+    setAutoFillBackground(true);
 
     this->setLayout(vbox);
 

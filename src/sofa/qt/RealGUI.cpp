@@ -35,6 +35,8 @@
 #include "SofaWindowDataGraph.h"
 #endif
 
+#include <QStyleHints>
+#include "dockwidgets/InspectorDock.h"
 
 #include <mutex>
 #include <QScreen>
@@ -149,6 +151,33 @@ public:
         QCoreApplication::setOrganizationName("Sofa Consortium");
         QCoreApplication::setOrganizationDomain("sofa");
         QCoreApplication::setApplicationName("runSofa");
+        setStyle("Fusion");
+
+        setStyleSheet("QToolTip { color: white; background-color: #353535; border: 1px solid white; }");
+
+        QPalette defaultPalette = QApplication::style()->standardPalette();
+        QColor text = defaultPalette.color(QPalette::ButtonText);
+
+        QPalette darkPalette;
+        darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+        darkPalette.setColor(QPalette::WindowText, text);
+        darkPalette.setColor(QPalette::Base, QColor(63, 63, 63));
+        darkPalette.setColor(QPalette::AlternateBase, Qt::red);
+        darkPalette.setColor(QPalette::ToolTipBase, QColor(35, 35, 35));
+        darkPalette.setColor(QPalette::ToolTipText, text);
+        darkPalette.setColor(QPalette::Text, text);
+        darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+        darkPalette.setColor(QPalette::ButtonText, text);
+        darkPalette.setColor(QPalette::BrightText, Qt::red);
+        darkPalette.setColor(QPalette::Highlight, QColor(142, 45, 197).lighter());
+        darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+        darkPalette.setColor(QPalette::Disabled, QPalette::Text, QColor(127, 127, 127));
+        darkPalette.setColor(QPalette::Disabled, QPalette::ButtonText, QColor(127, 127, 127));
+        darkPalette.setColor(QPalette::Disabled, QPalette::WindowText, QColor(127, 127, 127));
+        darkPalette.setColor(QPalette::Disabled, QPalette::Highlight, QColor(80, 80, 80));
+        darkPalette.setColor(QPalette::Disabled, QPalette::HighlightedText, QColor(160, 160, 160));
+
+        setPalette(darkPalette);
     }
 
 #if QT_VERSION < 0x050000
@@ -272,6 +301,7 @@ void RealGUI::CreateApplication(int /*_argc*/, char** /*_argv*/)
     *argc = 1;
     argv[0] = strdup ( BaseGUI::GetProgramName() );
     argv[1]=nullptr;
+
     application = new QSOFAApplication ( *argc,argv );
 
     //force locale to Standard C
@@ -350,7 +380,10 @@ RealGUI::RealGUI ( const char* viewername)
       m_viewerMSAANbSampling(1)
 {
     setupUi(this);
-    
+
+    m_inspectorDock = new InspectorDock(this);
+    addDockWidget(Qt::RightDockWidgetArea, m_inspectorDock);
+
     ExpandAllButton->setIcon(QIcon(":/RealGUI/expandAll"));
     CollapseAllButton->setIcon(QIcon(":/RealGUI/collapseAll"));
     sceneGraphRefreshToggleButton->setIcon(QIcon(":/RealGUI/sceneGraphRefresh"));
@@ -766,6 +799,7 @@ void RealGUI::setSceneWithoutMonitor (Node::SPtr root, const char* filename, boo
         simulationGraph->resizeColumnToContents(0);
         statWidget->CreateStats(root.get());
 
+        m_inspectorDock->setCurrentSelection({root});
         getViewer()->setScene( root, filename );
         getViewer()->load();
         getViewer()->resetView();
@@ -805,6 +839,9 @@ void RealGUI::unloadScene(bool _withViewer)
 
     if(_withViewer && getViewer())
         getViewer()->setScene(nullptr);
+
+    m_inspectorDock->setCurrentSelection({});
+    getViewer()->setCurrentSelection({});
 }
 
 //------------------------------------
@@ -1572,7 +1609,10 @@ void RealGUI::createSimulationGraph()
     // Activates the hoovering visual feedback only when working in interactive mode.
     if(m_enableInteraction){
         connect(simulationGraph, &QSofaListView::itemSelectionChanged, this, [this](){
-            getViewer()->setCurrentSelection(simulationGraph->getCurrentSelectedBases());
+            auto selectedItems = simulationGraph->getCurrentSelectedBases();
+            getViewer()->setCurrentSelection(selectedItems);
+            m_inspectorDock->setCurrentSelection(selectedItems);
+
         });
     }
 

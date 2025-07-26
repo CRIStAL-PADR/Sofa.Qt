@@ -128,7 +128,7 @@
    <property name="minimumSize">
     <size>
      <width>200</width>
-     <height>594</height>
+     <height>637</height>
     </size>
    </property>
    <attribute name="dockWidgetArea">
@@ -154,10 +154,16 @@
         <bool>true</bool>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>400</height>
+        </size>
        </property>
        <layout class="QVBoxLayout" name="_13">
         <property name="sizeConstraint">
@@ -279,6 +285,9 @@
            <widget class="QPushButton" name="startButton">
             <property name="toolTip">
              <string>Launch the Simulation</string>
+            </property>
+            <property name="autoFillBackground">
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>&amp;Animate</string>

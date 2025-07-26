@@ -202,9 +202,6 @@ bool QDataSimpleEdit::createWidgets()
         layout->addWidget(innerWidget_.widget.lineEdit);
     }
 
-
-
-
     return true;
 }
 

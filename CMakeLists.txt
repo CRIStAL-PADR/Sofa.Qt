@@ -163,6 +163,7 @@ set(MOC_HEADER_FILES
     ${SRC_ROOT}/SofaPluginManager.h
     ${SRC_ROOT}/SofaSceneGraphWidget.h
     ${SRC_ROOT}/WDoubleLineEdit.h    
+    ${SRC_ROOT}/dockwidgets/InspectorDock.h
     )
 set(HEADER_FILES
     ${SRC_ROOT}/config.h.in
@@ -222,6 +223,7 @@ set(SOURCE_FILES
     ${SRC_ROOT}/SofaSceneGraphWidget.cpp
     ${SRC_ROOT}/viewer/VisualModelPolicy.cpp
     ${SRC_ROOT}/QtDataRepository.cpp
+    ${SRC_ROOT}/dockwidgets/InspectorDock.cpp
 )
 set(UI_FILES
     ${SRC_ROOT}/AboutDialog.ui
@@ -232,6 +234,8 @@ set(UI_FILES
     ${SRC_ROOT}/PluginManager.ui
     ${SRC_ROOT}/ViewerShortcuts.ui
     ${SRC_ROOT}/VideoRecorderManager.ui
+    ${SRC_ROOT}/dockwidgets/InspectorDock.ui
+
 )
 set(QRC_FILES
     ${SRC_ROOT}/resources/RealGUI.qrc

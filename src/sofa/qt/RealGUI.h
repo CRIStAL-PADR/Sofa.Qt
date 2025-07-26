@@ -27,10 +27,12 @@
 
 #include <ui_GUI.h>
 #include <ui_ViewerShortcuts.h>
+#include <ui_InspectorDock.h>
 #include "GraphListenerQListView.h"
 #include "QMenuFilesRecentlyOpened.h"
 #include "AboutSOFADialog.h"
 #include "PickHandlerCallBacks.h"
+#include "sofa/qt/dockwidgets/InspectorDock.h"
 
 #include <sofa/gui/common/BaseGUI.h>
 #include <sofa/gui/common/ViewerFactory.h>
@@ -171,6 +173,8 @@ protected:
     /// list of all viewer key name (for creation) mapped to its QAction in the GUI
     std::map< helper::SofaViewerFactory::Key, QAction* > viewerMap;
     InformationOnPickCallBack informationOnPickCallBack;
+
+    InspectorDock* m_inspectorDock;
 
     QWidget* currentTab;
     QSofaStatWidget* statWidget;

@@ -103,6 +103,10 @@
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
+    <addaction name="actionControls"/>
+    <addaction name="actionInspector"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="helpMenu">
     <property name="title">
@@ -349,7 +353,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="TabGraph">
            <attribute name="title">
@@ -940,6 +944,28 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
   <action name="actionViewerShowDocumentation">
    <property name="text">
     <string>Viewer's shortcuts</string>
+   </property>
+  </action>
+  <action name="actionInspector">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Inspector</string>
+   </property>
+  </action>
+  <action name="actionControls">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Controls</string>
    </property>
   </action>
  </widget>

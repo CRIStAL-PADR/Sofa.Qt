@@ -36,13 +36,6 @@
 namespace sofa::qt
 {
 
-class ItemStyle
-{
-public:
-    std::string className;
-    std::map<std::string, std::string> map;
-};
-
 InspectorDock::InspectorDock(QWidget* parent) : QDockWidget(parent)
 {
     setupUi(this);
@@ -60,10 +53,6 @@ void InspectorDock::setCurrentSelection(const std::set<sofa::core::objectmodel::
 
     updateContentFromBase((*m_currentBases.begin()).get());
 }
-
-//void InspectorDock::searchCascadingStyleFor(const std::string& name)
-//{
-//}
 
 void clearLayout(QLayout *layout) {
     if (!layout)

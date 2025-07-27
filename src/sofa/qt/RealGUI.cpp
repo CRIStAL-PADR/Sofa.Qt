@@ -515,6 +515,12 @@ RealGUI::RealGUI ( const char* viewername)
     connect(helpAboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
     m_filelistener = new RealGUIFileListener(this);
+
+    connect(actionInspector, &QAction::toggled, m_inspectorDock, &QDockWidget::setVisible);
+    connect(m_inspectorDock, &QDockWidget::visibilityChanged, actionInspector, &QAction::setChecked);
+    connect(actionControls, &QAction::toggled, dockWidget, &QDockWidget::setVisible);
+    connect(dockWidget, &QDockWidget::visibilityChanged, actionControls, &QAction::setChecked);
+
 }
 
 //------------------------------------
@@ -1635,7 +1641,6 @@ void RealGUI::createSimulationGraph()
             auto selectedItems = simulationGraph->getCurrentSelectedBases();
             getViewer()->setCurrentSelection(selectedItems);
             m_inspectorDock->setCurrentSelection(selectedItems);
-
         });
     }
 

@@ -24,6 +24,7 @@
 #include <ui_InspectorDock.h>
 #include <sofa/core/objectmodel/Base.h>
 #include <set>
+#include <json.h>
 
 namespace sofa::qt
 {

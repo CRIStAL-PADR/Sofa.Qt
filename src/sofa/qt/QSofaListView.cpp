@@ -84,6 +84,8 @@ QSofaListView::QSofaListView(const SofaListViewAttribute& attribute,
     connect(this, &QSofaListView::customContextMenuRequested ,this, &QSofaListView::RunSofaRightClicked);
     connect(this, &QSofaListView::itemDoubleClicked, this, &QSofaListView::RunSofaDoubleClicked);
     connect(this, &QSofaListView::itemClicked, this, [&](QTreeWidgetItem *item, int){ updateMatchingObjectmodel(item); });
+
+    setToolTipDuration(0.0);
 }
 
 QSofaListView::~QSofaListView()
@@ -455,6 +457,8 @@ void QSofaListView::RunSofaRightClicked( const QPoint& point)
         act->setEnabled(object_.asBase()->getInstanciationSourceFileName() != "");
         act = contextMenu->addAction("Go to Implementation...", this, SLOT(openImplementation()));
         act->setEnabled(object_.asBase()->getDefinitionSourceFileName() != "");
+        act = contextMenu->addAction("Go to Error...", this, SLOT(openError()));
+        act->setEnabled(object_.asBase()->countLoggedMessages({sofa::helper::logging::Message::Error, sofa::helper::logging::Message::Fatal}) != 0);
     }
 
     contextMenu->addSeparator();
@@ -678,6 +682,19 @@ void QSofaListView::openImplementation()
     }
 }
 
+void QSofaListView::openError()
+{
+    if(object_.isBase())
+    {
+        auto messages = object_.asBase()->getLoggedMessages();
+        if(messages.empty())
+            return;
+        auto message = messages.back();
+        openInExternalEditor(message.fileInfo()->filename,
+                             message.fileInfo()->line);
+    }
+}
+
 
 void QSofaListView::openInEditor()
 {
@@ -718,7 +735,6 @@ bool QSofaListView::isNodeErasable ( BaseNode* node)
     }
 
     return true;
-
 }
 
 void QSofaListView::Export()

@@ -132,6 +132,7 @@ protected Q_SLOTS:
     void RemoveNode();
     void Modify();
     void openInEditor();
+    void openError();
     void openInstanciation();
     void openImplementation();
     void copyFilePathToClipBoard();

@@ -317,9 +317,19 @@ void setMessageIconFrom(QTreeWidgetItem* item, Base* object)
     const bool haveWarnings = object->countLoggedMessages({Message::Warning})!=0;
     const bool haveErrors = object->countLoggedMessages({Message::Error, Message::Fatal})!=0;
 
+    auto messages = object->getLoggedMessages();
+    std::stringstream tmp;
+    for(auto message : messages)
+    {
+        tmp << message.messageAsString();
+    }
+
     const QPixmap* pix = getPixmap(object, haveInfos, haveWarnings, haveErrors);
-    if (pix)
+    if (pix){
         item->setIcon(0, QIcon(*pix));
+        if(haveWarnings || haveErrors)
+            item->setToolTip(0, QString::fromStdString(tmp.str()));
+    }
 }
 
 ObjectStateListener::ObjectStateListener(

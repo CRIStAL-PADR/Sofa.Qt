@@ -92,7 +92,7 @@ QtViewer::QtViewer(QWidget* parent, const char* name)
     backgroundColour[2] = 1.0f;
 
     _video = false;
-    m_bShowAxis = false;
+    m_showFrame = false;
     _background = 0;
     _numOBJmodels = 0;
     _materialMode = 0;
@@ -523,7 +523,6 @@ void QtViewer::drawColourPicking(ColourPickingVisitor::ColourCode code)
     glMultMatrixd(lastProjectionMatrix);
     glMatrixMode(GL_MODELVIEW);
 
-
     ColourPickingVisitor cpv(sofa::core::visual::visualparams::defaultInstance(), code);
     cpv.execute( groot.get() );
 
@@ -531,8 +530,8 @@ void QtViewer::drawColourPicking(ColourPickingVisitor::ColourCode code)
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
-
 }
+
 // -------------------------------------------------------------------
 // ---
 // -------------------------------------------------------------------
@@ -547,52 +546,22 @@ void QtViewer::DisplayOBJs()
     Enable<GL_LIGHTING> light;
     Enable<GL_DEPTH_TEST> depth;
 
-
     vparams->sceneBBox() = groot->f_bbox.getValue();
 
-
     glShadeModel(GL_SMOOTH);
-    //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
     glColor4f(1, 1, 1, 1);
     glDisable(GL_COLOR_MATERIAL);
 
     if (!initTexturesDone)
     {
-        // 		std::cout << "-----------------------------------> initTexturesDone\n";
-        //---------------------------------------------------
         sofa::simulation::node::initTextures(groot.get());
-        //---------------------------------------------------
         initTexturesDone = true;
     }
 
     {
-
         sofa::simulation::node::draw(vparams, groot.get());
-
-
-
-        if (m_bShowAxis)
+        if (m_showFrame)
         {
-            const SReal* minBBox = vparams->sceneBBox().minBBoxPtr();
-            const SReal* maxBBox = vparams->sceneBBox().maxBBoxPtr();
-            SReal maxDistance = std::numeric_limits<SReal>::min();
-
-            maxDistance = maxBBox[0] - minBBox[0];
-            for (int i=1;i<3;i++)
-            {
-                if(maxDistance < (maxBBox[i] - minBBox[i]))
-                    maxDistance = (maxBBox[i] - minBBox[i]);
-            }
-
-            if(maxDistance == 0 )
-                maxDistance = 1.0;
-
-            // World Axis: Arrows of axis are defined as 10% of maxBBox
-            DrawAxis(0.0, 0.0, 0.0,(maxDistance*0.1));
-
-            if (vparams->sceneBBox().minBBox().x() < vparams->sceneBBox().maxBBox().x())
-                DrawBox(vparams->sceneBBox().minBBoxPtr(), vparams->sceneBBox().maxBBoxPtr());
-
             // 2D Axis: project current world orientation in the lower left part of the screen
             glMatrixMode(GL_PROJECTION);
             glPushMatrix();
@@ -601,16 +570,13 @@ void QtViewer::DisplayOBJs()
             glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
             glLoadIdentity();
-            gl::Axis::draw(sofa::type::Vec3(30.0,30.0,0.0),currentCamera->getOrientation().inverse(), 25.0, sofa::type::RGBAColor::red(), sofa::type::RGBAColor::green(), sofa::type::RGBAColor::blue());
+            gl::Axis::draw(sofa::type::Vec3(vparams->viewport()[2]-60,30.0,0.0),currentCamera->getOrientation().inverse(), 35.0, sofa::type::RGBAColor::red(), sofa::type::RGBAColor::green(), sofa::type::RGBAColor::blue());
             glMatrixMode(GL_PROJECTION);
             glPopMatrix();
             glMatrixMode(GL_MODELVIEW);
             glPopMatrix();
-
         }
     }
-
-    // glDisable(GL_COLOR_MATERIAL);
 }
 
 // -------------------------------------------------------
@@ -630,7 +596,6 @@ void QtViewer::DisplayMenu(void)
 
     glColor3f(0.3f, 0.7f, 0.95f);
     glRasterPos2i(_W / 2 - 5, _H - 15);
-    //sprintf(buffer,"FPS: %.1f\n", _frameRate.GetFPS());
 
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
@@ -920,7 +885,7 @@ void QtViewer::calcProjection(int width, int height)
     if (!currentCamera)
         return;
 
-    if (groot && (groot->f_bbox.getValue().isValid() || m_bShowAxis))
+    if (groot && (groot->f_bbox.getValue().isValid() || m_showFrame))
     {
         vparams->sceneBBox() = groot->f_bbox.getValue();
         currentCamera->setBoundingBox(vparams->sceneBBox().minBBox(), vparams->sceneBBox().maxBBox());

@@ -1449,6 +1449,7 @@ void RealGUI::saveSettings(BaseViewer* viewer)
     settings.setValue("viewer/showSelectedObjectVolumes", viewer->m_showSelectedObjectVolumes);
     settings.setValue("viewer/showSelectedObjectIndices", viewer->m_showSelectedObjectIndices);
     settings.setValue("viewer/visualScaling", viewer->m_visualScaling);
+    settings.setValue("viewer/showFrame", viewer->m_showFrame);
     settings.sync();
 }
 
@@ -1468,6 +1469,7 @@ void RealGUI::loadSettings(BaseViewer* viewer)
     viewer->m_showSelectedObjectVolumes = settings.value("viewer/showSelectedObjectVolumes").toBool();
     viewer->m_showSelectedObjectIndices = settings.value("viewer/showSelectedObjectIndices").toBool();
     viewer->m_visualScaling = settings.value("viewer/visualScaling", 0.10).toFloat();
+    viewer->m_showSelectedObjectIndices = settings.value("viewer/showFrame").toBool();
 }
 
 
@@ -1521,6 +1523,7 @@ void RealGUI::initViewer(BaseViewer* _viewer)
         Ui_GUI::showObjectVolumes->setChecked(sofaViewer->m_showSelectedObjectVolumes);
         Ui_GUI::showObjectIndices->setChecked(sofaViewer->m_showSelectedObjectIndices);
         Ui_GUI::value->setValue(sofaViewer->m_visualScaling);
+        Ui_GUI::showGizmosAxis->setChecked(sofaViewer->m_showFrame);
 
         connect(showNodeBoundingBox, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedNodeBoundingBox = checked;});
         connect(showObjectBoundingBox, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectBoundingBox = checked;});
@@ -1528,6 +1531,7 @@ void RealGUI::initViewer(BaseViewer* _viewer)
         connect(showObjectSurfaces, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectSurfaces = checked;});
         connect(showObjectVolumes, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectVolumes = checked;});
         connect(showObjectIndices, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showSelectedObjectIndices = checked;});
+        connect(showGizmosAxis, &QCheckBox::clicked, this, [this, sofaViewer](bool checked){sofaViewer->m_showFrame = checked;});
 
         connect(actionViewerShowDocumentation, &QAction::triggered, this, [this, sofaViewer](bool state){
             QDialog* dialog=new QDialog();

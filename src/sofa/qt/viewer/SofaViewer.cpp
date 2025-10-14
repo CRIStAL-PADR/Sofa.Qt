@@ -96,7 +96,7 @@ void SofaViewer::keyPressEvent(QKeyEvent * e)
     case Qt::Key_R:
         // --- draw axis
     {
-        m_bShowAxis = !m_bShowAxis;
+        m_showFrame = !m_showFrame;
         break;
     }
     case Qt::Key_V:

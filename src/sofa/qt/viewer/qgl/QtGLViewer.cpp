@@ -84,7 +84,7 @@ QtGLViewer::QtGLViewer(QWidget* parent, const char* name)
     connect( timerAnimate, SIGNAL(timeout()), this, SLOT(animate()) );
 
     _video = false;
-    m_bShowAxis = false;
+    m_showFrame = false;
     _background = 0;
     _numOBJmodels = 0;
     _materialMode = 0;
@@ -589,7 +589,7 @@ void QtGLViewer::DisplayOBJs()
 
         //Draw Debug information of the components
         sofa::simulation::node::draw(vparams, groot.get());
-        if (m_bShowAxis)
+        if (m_showFrame)
         {
             //DrawAxis(0.0, 0.0, 0.0, 10.0);
             DrawAxis(0.0, 0.0, 0.0, this->sceneRadius());

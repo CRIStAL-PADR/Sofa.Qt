@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1063</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,12 +15,6 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>210</width>
-    <height>481</height>
-   </size>
   </property>
   <property name="acceptDrops">
    <bool>true</bool>
@@ -70,7 +64,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1063</width>
      <height>22</height>
     </rect>
    </property>
@@ -685,7 +679,7 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
               <item>
                <widget class="QGroupBox" name="showObject">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -733,6 +727,12 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
                    </item>
                    <item>
                     <widget class="QWidget" name="renderingScale" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <layout class="QHBoxLayout" name="horizontalLayout_3">
                       <item>
                        <widget class="QLabel" name="label">
@@ -757,6 +757,57 @@ State 2: dirty, in that state the button reflect the fact that the scene graph v
                   </layout>
                  </item>
                 </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="showGizmos">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="title">
+                 <string>Show Gizmos</string>
+                </property>
+                <widget class="QWidget" name="verticalLayoutWidget">
+                 <property name="geometry">
+                  <rect>
+                   <x>9</x>
+                   <y>29</y>
+                   <width>271</width>
+                   <height>141</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0">
+                  <item>
+                   <widget class="QCheckBox" name="showGizmosAxis">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>frame</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
                </widget>
               </item>
              </layout>
